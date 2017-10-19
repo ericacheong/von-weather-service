@@ -7,8 +7,8 @@ weather = [
     {
         'id': 1,
         'city': 'paris',
-        'temp_celsius': '15', 
-        'humidity_percent': '82',
+        'temp_celsius': 15, 
+        'humidity_percent': 82,
         'wind_kmh': 10,
         'status': 'Partly cloudy',
         'atmospheric_pressure_mb': 1009
@@ -16,8 +16,8 @@ weather = [
     {
         'id': 2,
         'city': 'hongkong',
-        'temp_celsius': '24',
-        'humidity_percent': '67',
+        'temp_celsius': 24,
+        'humidity_percent': 67,
         'wind_kmh': 12,
         'status': 'Sunny',
         'atmospheric_pressure_mb': 1013
@@ -25,8 +25,8 @@ weather = [
     {
         'id': 3,
         'city': 'shanghai',
-        'temp_celsius': '19',
-        'humidity_percent': '75',
+        'temp_celsius': 19,
+        'humidity_percent': 75,
         'wind_kmh': 9,
         'status': 'Clear',
         'atmospheric_pressure_mb': 1013
@@ -37,7 +37,7 @@ weather = [
 
 
 
-@app.route('/api/v1.0/weather/<city>/temp', methods=['GET'])
+@app.route('/api/v1.0/<city>/temp', methods=['GET'])
 def get_temp(city):
     city_weather = [city_weather for city_weather in weather if city_weather['city'] == city]
     if len(city_weather) == 0:
@@ -47,7 +47,7 @@ def get_temp(city):
         'temperture': city_weather[0]['temp_celsius']
         })
 
-@app.route('/api/v1.0/weather/<city>/humidity', methods=['GET'])
+@app.route('/api/v1.0/<city>/humidity', methods=['GET'])
 def get_humidity(city):
     city_weather = [city_weather for city_weather in weather if city_weather['city'] == city]
     if len(city_weather) == 0:
@@ -57,7 +57,7 @@ def get_humidity(city):
         'humidity': city_weather[0]['humidity_percent']
         })
 
-@app.route('/api/v1.0/weather/<city>/wind', methods=['GET'])
+@app.route('/api/v1.0/<city>/wind', methods=['GET'])
 def get_wind(city):
     city_weather = [city_weather for city_weather in weather if city_weather['city'] == city]
     if len(city_weather) == 0:
@@ -67,17 +67,17 @@ def get_wind(city):
         'wind': city_weather[0]['wind_kmh']
         })
 
-@app.route('/api/v1.0/weather/<city>/status', methods=['GET'])
+@app.route('/api/v1.0/<city>/status', methods=['GET'])
 def get_status(city):
     city_weather = [city_weather for city_weather in weather if city_weather['city'] == city]
     if len(city_weather) == 0:
         abort(404)
     return jsonify({
         'city': city,
-        'humidity': city_weather[0]['humidity_percent']
+        'status': city_weather[0]['status']
         })
 
-@app.route('/api/v1.0/weather/<city>/atmospres', methods=['GET'])
+@app.route('/api/v1.0/<city>/atmospres', methods=['GET'])
 def get_atmospres(city):
     city_weather = [city_weather for city_weather in weather if city_weather['city'] == city]
     if len(city_weather) == 0:
